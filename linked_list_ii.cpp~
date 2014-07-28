@@ -1,0 +1,44 @@
+#include <iostream>
+using namesapce std;
+
+//Definition for singly-linked list.
+struct ListNode {
+  int val;
+  ListNode *next;
+  ListNode(int x) : val(x), next(NULL) {}
+};
+ 
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+      ListNode *fast, *slow;
+      	  if(slow->next == NULL){
+	    return NULL;
+	  }
+	  else slow = slow->next;
+
+	  if(fast->next->next == NULL){
+	    return NULL;
+	  }
+	  else fast = fast->next->next;
+
+	while(*fast!=*slow){
+	  if(slow->next == NULL){
+	    return NULL;
+	  }
+	  else slow = slow->next;
+
+	  if(fast->next->next == NULL){
+	    return NULL;
+	  }
+	  else fast = fast->next->next;
+
+	}
+	return slow->next;
+    }
+};
+
+int main(){
+  Solution linkedlist;
+linkedlist
+}
