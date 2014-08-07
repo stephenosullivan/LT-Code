@@ -1,0 +1,95 @@
+#include <iostream>
+using namespace std;
+
+//Definition for singly-linked list.
+struct ListNode {
+     int val;
+     ListNode *next;
+     ListNode(int x) : val(x), next(NULL) {}
+};
+ 
+class Solution {
+public:
+    ListNode *reverseBetween(ListNode *head, int m, int n) {
+        if(m==n){
+            return head;
+        }
+        ListNode *pm, *pn, *p1, *p2 *px;
+        int cntm = m-1;
+        int cntn = n-1;
+        int cntmn;
+        pm = head;
+        pn = head;
+        
+        while(cntn>0){
+            pn = pn->next;
+            --cntn;
+        }
+        
+        if(cntm==1){
+            px = pn;
+        }
+        else{
+            px = head
+            while(cntm>0){
+                if(cntm!=1){
+                    px = px->next;
+                }
+                pm = pm->next;
+                --cntm;
+            }
+            px->next = pn;
+        }
+        
+        
+        /*if(pn->next!=NULL)
+            p2 = pn->next;
+        else {
+            p2 = NULL;
+            //pm->next = NULL;
+        }*/
+        p2 = pn->next;
+        for(int i = n-m; i>0; --i){
+            cntmn = i;
+            p1 = pm;
+            while(cntmn>1){
+                p1 = p1->next;
+                --cntmn;
+            }
+            pn->next = p1;
+            if(i!=1)
+                pn = p1;
+            
+        }
+        pm->next = p2;
+        
+        if(pm == head)
+            return px;
+            
+        return head;
+            
+        
+    /*    if(p2)
+            pm->next = p2;  
+        
+        
+        if(pm->next == pn)
+            pm->next = NULL;
+        if(pm == head)
+            pm->next = NULL;
+        if(m==1)
+            return  p2;
+        if(pm->next != NULL)
+            pm->next = p2;
+        return head;*/
+    }
+};
+
+int main(){
+  //Solution link_reverse;
+  ListNode a(1),b(2),c(3);
+  a.next = b;
+  b.next = c;
+  c.next = NULL;
+  cout << a.val << endl;
+}
