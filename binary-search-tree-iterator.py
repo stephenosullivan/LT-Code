@@ -7,6 +7,40 @@ class TreeNode:
         self.left = None
         self.right = None
 
+class BSTIteratorUsingYield:
+    # @param root, a binary search tree's root node
+    def __init__(self, root):
+        self.it = self.recursive_inorder(root)
+        self._hasnext = None
+
+    def recursive_inorder(self, node):
+        if node:
+            for node_data in self.recursive_inorder(node.left):
+                yield node_data
+            yield node.val
+            for node_data in self.recursive_inorder(node.right):
+                yield node_data
+
+    #def __iter__(self):
+    #    return self
+
+    # @return a boolean, whether we have a next smallest number
+    def hasNext(self):
+        if self._hasnext is None:
+            try: self._thenext = next(self.it)
+            except StopIteration: self._hasnext = False
+            else: self._hasnext = True
+        return self._hasnext
+
+
+    # @return an integer, the next smallest number
+    def next(self):
+        if self._hasnext:
+            result = self._thenext
+        else:
+            result = next(self.it)
+        self._hasnext = None
+        return result
 
 class BSTIterator:
     # @param root, a binary search tree's root node
@@ -50,25 +84,38 @@ class BSTIterator:
         # next smallest node so that the iterator passes over a
         # decreasing set of values
 
-        # def __init__(self, root):
-        #     self.inorder_reverse = []
-        #     if root:
-        #         nodes_to_visit = [root]
-        #         while nodes_to_visit:
-        #             node = nodes_to_visit.pop()
-        #             self.inorder_reverse.append(node)
-        #             if node.left:
-        #                 nodes_to_visit.append(node.left)
-        #                 node = node.left
-        #             while node.right:
-        #                 nodes_to_visit.append(node.right)
-        #                 node = node.right
-        #
-        #         self.counter = len(self.inorder_reverse)
-        #         self.iternode = iter(self.inorder_reverse)
-        #
-        #     else:
-        #         self.counter = 0
+class BSTIteratorDecreasing:
+    # @param root, a binary search tree's root node
+
+    def __init__(self, root):
+        self.inorder_reverse = []
+        if root:
+            nodes_to_visit = [root]
+            while nodes_to_visit:
+                node = nodes_to_visit.pop()
+                self.inorder_reverse.append(node)
+                if node.left:
+                    nodes_to_visit.append(node.left)
+                    node = node.left
+                while node.right:
+                    nodes_to_visit.append(node.right)
+                    node = node.right
+
+            self.counter = len(self.inorder_reverse)
+            self.iternode = iter(self.inorder_reverse)
+
+        else:
+            self.counter = 0
+
+    # @return a boolean, whether we have a next smallest number
+    def hasNext(self):
+        self.counter > 0
+
+    # @return an integer, the next smallest number
+    def next(self):
+        self.counter -= 1
+        return self.iternode.next().val
+
 
 # Your BSTIterator will be called like this:
 # i, v = BSTIterator(root), []
