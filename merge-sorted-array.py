@@ -1,5 +1,6 @@
 __author__ = 'stephenosullivan'
 
+
 class Solution:
     # @param {integer[]} nums1
     # @param {integer} m
@@ -20,9 +21,7 @@ class Solution:
                 nums1[count] = nums2[n]
                 n -= 1
 
-
-        while n>=0:
+        while n >= 0:
             count -= 1
             nums1[count] = nums2[n]
             n -= 1
-
