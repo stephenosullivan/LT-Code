@@ -5,6 +5,15 @@ class Solution:
     # @param {integer} k
     # @return {integer[][]}
     def combine(self, n, k):
+        return self.combineRecursive(k, range(1, n + 1))
+
+    def combineRecursive(self, k, numbers):
+        if k == 1:
+            return [[x] for x in numbers]
+        else:
+            return [row + [x] for row in self.combineRecursive(k - 1, numbers) for x in numbers if x > row[-1]]
+
+    def combineIterative(self, n, k):
         output = []
         if k > 0:
             for n_index in range(1, n - k + 2):
