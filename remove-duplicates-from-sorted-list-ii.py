@@ -25,12 +25,12 @@ class Solution:
                 else:
                     while post and current.val == post.val:
                         post = post.next
-                    #previous.next = post
                 current = post
                 if post:
                     post = post.next
             previous.next = current
         return headNone.next
+
 
 if __name__ == '__main__':
     sol = Solution()
