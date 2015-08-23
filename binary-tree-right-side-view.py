@@ -9,6 +9,19 @@ __author__ = 'stephenosullivan'
 
 class Solution(object):
     def rightSideView(self, root):
+        def recursiveHelper(node, level):
+            if node is None:
+                return []
+            if level == len(output):
+                output.append(node.val)
+            recursiveHelper(node.right, level + 1)
+            recursiveHelper(node.left, level + 1)
+
+        output = []
+        recursiveHelper(root, 0)
+        return output
+
+    def rightSideViewIterative(self, root):
         """
         :type root: TreeNode
         :rtype: List[int]

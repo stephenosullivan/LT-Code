@@ -27,12 +27,10 @@ public:
             level = node_levels.back();
             node_levels.pop_back();
             while (node){
-                //cout << node->val << endl;
                 if (node->left){
                     nodes_to_visit.push_back(node->left);
                     node_levels.push_back(level+1);
                 }
-                //cout << "level " << level << " " << levelmax << endl;
                 if (level > levelmax){
 
                     output.push_back(node->val);
