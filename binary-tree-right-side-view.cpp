@@ -9,36 +9,50 @@
  */
 class Solution {
 public:
-    vector<int> rightSideView(TreeNode* root) {
-        vector<int> output;
+    vector<int> output;
 
-        vector<TreeNode*> nodes_to_visit;
-        nodes_to_visit.push_back(root);
-        vector<int> node_levels;
-        node_levels.push_back(1);
+    vector<int> rightSideView(TreeNode* root){
+
+        helper(root, 0);
+        return this->output;
+    }
+
+    int helper(TreeNode* root, int level){
+        if (!root){
+            return 0;
+        }
+        if (level == output.size()){
+            this->output.push_back(root->val);
+        }
+        helper(root->right, level + 1);
+        helper(root->left, level + 1);
+    }
+
+
+
+    vector<int> rightSideViewIterative(TreeNode* root) {
+        vector<int> output;
+        vector<tuple<TreeNode*, int> > nodes_levels;
 
         int levelmax = 0;
-        int level = 1;
+        int level = 0;
         TreeNode *node;
 
-        while (!nodes_to_visit.empty()){
-            node = nodes_to_visit.back();
-            nodes_to_visit.pop_back();
-            level = node_levels.back();
-            node_levels.pop_back();
+        nodes_levels.push_back(make_tuple(root, level));
+
+        while (!nodes_levels.empty()){
+            tie(node, level) = nodes_levels.back();
+            nodes_levels.pop_back();
             while (node){
                 if (node->left){
-                    nodes_to_visit.push_back(node->left);
-                    node_levels.push_back(level+1);
+                    nodes_levels.push_back(make_tuple(node->left, level+1));
                 }
-                if (level > levelmax){
-
+                if (level == levelmax){
                     output.push_back(node->val);
                     levelmax += 1;
                 }
                 level += 1;
                 node = node->right;
-
             }
         }
         return output;
