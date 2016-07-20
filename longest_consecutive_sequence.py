@@ -58,6 +58,6 @@ if __name__ == '__main__':
     sol = Solution()
     array = [0, 3, 7, 2, 5, 8, 4, 6, 0, 1]
     array = [-7, -1, 3, -9, -4, 7, -3, 2, 4, 9, 4, -9, 8, -7, 5, -1, -7]
-    array = [0]
+    # array = [0]
 
     print(sol.longestConsecutive(array))

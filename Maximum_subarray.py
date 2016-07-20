@@ -15,7 +15,7 @@ class Solution(object):
                 best = current
 
             current = max(0, current)
-                
+
         return best
 
     def maxSubArrayDPTopDown(self, nums):

@@ -102,8 +102,8 @@ class GuessingGame:
 
 
 if __name__ == '__main__':
-    nums = [i for i in range(10)]
-    target = 3
+    nums = [i for i in range(1, 8)]
+    target = 7
     sol = GuessingGame(nums)
     print(sol.guessPattern_v2(target), sum(sol.guessPattern_v2(target)))
     sol.printDP()
